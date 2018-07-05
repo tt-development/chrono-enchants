@@ -1,0 +1,9 @@
+enchants:
+  Goggles:
+    item:
+      DIAMOND_HELMET
+      DIAMOND_CHESTPLATE
+    chance: 1
+    maxLevel: 3
+    lore: &bGoggles lore :)
+    name: &aGoggles

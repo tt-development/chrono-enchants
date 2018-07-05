@@ -1,0 +1,8 @@
+name: Chrono Enchants
+main: ttdev.enchants.ChronoEnchants
+authors: [Thomas, Tre]
+version: 1.0
+commands:
+   enchant:
+      description: Test command.
+      usage: /<command>
