@@ -46,8 +46,7 @@ public class EnchantmentHandler {
 			}
 		}
 		
-		//TODO
-		//add level.
+		String enchantName = null;
 		
 		for (int i=0; i < enchants.size(); i++) {
 			int low = enchantsChanceMin.get(enchants.get(i));
@@ -55,11 +54,20 @@ public class EnchantmentHandler {
 			
 			for (int a=low; a < (max + 1); a++) {
 				if (random == a) {
-					addEnchant(item, enchants.get(i), 1);
+					enchantName = enchants.get(i);
 					break;
 				}
 			}
 		}
+		
+		int level = 1;
+		
+		int low = ConfigurationHandler.getBaseLevel(enchantName);
+		int max = ConfigurationHandler.getMaxLevel(enchantName);
+		
+		level = randomNumberGenerator.nextInt(max) + low;
+		
+		item = addEnchant(item, enchantName, level);
 		
 		return item;
 	}
