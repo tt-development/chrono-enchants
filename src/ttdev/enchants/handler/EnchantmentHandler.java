@@ -4,29 +4,39 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 
 import ttdev.api.user.items.Item;
 
 public class EnchantmentHandler {
 	
-	public static Item enchant(Item item) {
+	public static Item enchant(Item item, int level) {
 		
-		ArrayList<String> enchants = new ArrayList<String>();
+		Material itemType = item.getMaterial();
+		
+		//All posible enchants.
+		ArrayList<String> enchants = new ArrayList<String>(); 
 		
 		for (String enchant : ConfigurationHandler.getEnchants()) {
-			for (String possibleItem : ConfigurationHandler.getPossibleItems(enchant)) {
-				if (item.getMaterial().toString().equalsIgnoreCase(possibleItem)) {
+			if (ConfigurationHandler.getPossibleItems(enchant).contains(itemType.toString())) {
+				if (!enchants.contains("enchant") & ConfigurationHandler.getChance(enchant, level) != 0 & ConfigurationHandler.getMaxLevel(enchant, level) != 0) {
 					enchants.add(enchant);
 				}
 			}
 		}
 		
-		int maxChance = 0;
-		for (int i=0; i < enchants.size(); i++) {
-			maxChance = maxChance + ConfigurationHandler.getChance(enchants.get(i));
+		if (enchants.size() == 0) {
+			return item;
 		}
 		
+		//Max chance.
+		int maxChance = 0;
+		for (int i=0; i < enchants.size(); i++) {
+			maxChance = maxChance + ConfigurationHandler.getChance(enchants.get(i), level);
+		}
+		
+		//Pick the enchant.
 		Random randomNumberGenerator = new Random();
 		int random = randomNumberGenerator.nextInt(maxChance) + 1;
 		
@@ -36,13 +46,13 @@ public class EnchantmentHandler {
 		
 		for (int i=0; i < enchants.size(); i++) {
 			if (enchantsChanceSize == 0) {
-				enchantsChanceMin.put(enchants.get(i), 0);
-				enchantsChanceMax.put(enchants.get(i), (enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i))));
-				enchantsChanceSize = enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i));
+				enchantsChanceMin.put(enchants.get(i), 1);
+				enchantsChanceMax.put(enchants.get(i), (enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i), level)));
+				enchantsChanceSize = enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i), level);
 			} else {
-				enchantsChanceMin.put(enchants.get(i), (enchantsChanceSize));
-				enchantsChanceMax.put(enchants.get(i), (enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i))));
-				enchantsChanceSize = enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i));
+				enchantsChanceMin.put(enchants.get(i), (enchantsChanceSize + 1));
+				enchantsChanceMax.put(enchants.get(i), (enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i), level)));
+				enchantsChanceSize = enchantsChanceSize + ConfigurationHandler.getChance(enchants.get(i), level);
 			}
 		}
 		
@@ -60,33 +70,29 @@ public class EnchantmentHandler {
 			}
 		}
 		
-		int level = 1;
+		//Pick the level of the enchant.
+		int enchantmentLevel = 1;
 		
 		int low = ConfigurationHandler.getBaseLevel(enchantName);
-		int max = ConfigurationHandler.getMaxLevel(enchantName);
+		int max = ConfigurationHandler.getMaxLevel(enchantName, level);
 		
-		level = randomNumberGenerator.nextInt(max) + low;
+		enchantmentLevel = randomNumberGenerator.nextInt(max) + low;
 		
-		item = addEnchant(item, enchantName, level);
+		System.out.println("Name: " + enchantName);
+		System.out.println("Level: " + enchantmentLevel);
+		
+		item = addEnchant(item, enchantName, enchantmentLevel);
 		
 		return item;
 	}
 
-	public static Item addEnchant(Item item, String enchant, int level) {
-		
+	private static Item addEnchant(Item item, String enchant, int level) {
 		if (isDefaultEnchantment(enchant)) {
 			item.addEnchant(Enchantment.getByName(enchant), level);
 		} else {
 			item.setName(ConfigurationHandler.getName(enchant + " " + level));
 			item.addLore(ConfigurationHandler.getLore(enchant));
 		}
-		 
-		return item;
-	}
-	
-	public static Item addEnchant(Item item, Enchantment enchant, int level) {
-		
-		item.addEnchant(enchant, level);
 		 
 		return item;
 	}

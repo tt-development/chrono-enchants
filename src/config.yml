@@ -1,9 +1,35 @@
+enabledEnchants:
+  - Goggles
+  - Fish
+
 enchants:
   Goggles:
     item:
-      DIAMOND_HELMET
-      DIAMOND_CHESTPLATE
-    chance: 1
-    maxLevel: 3
-    lore: &bGoggles lore :)
-    name: &aGoggles
+      - DIAMOND_HELMET
+    lvl_5_chance: 1
+    lvl_15_chance: 2
+    lvl_30_chance: 3 
+    lvl_45_chance: 4
+    lvl_60_chance: 5
+    lvl_5_maxLevel: 1
+    lvl_15_maxLevel: 1
+    lvl_30_maxLevel: 1
+    lvl_45_maxLevel: 1
+    lvl_60_maxLevel: 1
+    lore: lore :)
+    name: Goggles
+  Fish:
+    item:
+      - DIAMOND_HELMET
+    lvl_5_chance: 1
+    lvl_15_chance: 0
+    lvl_30_chance: 3 
+    lvl_45_chance: 4
+    lvl_60_chance: 5
+    lvl_5_maxLevel: 1
+    lvl_15_maxLevel: 0
+    lvl_30_maxLevel: 1
+    lvl_45_maxLevel: 1
+    lvl_60_maxLevel: 1
+    lore: lore :)
+    name: Fish
