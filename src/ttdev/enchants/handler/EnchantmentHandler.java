@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import ttdev.api.user.items.Item;
 
 public class EnchantmentHandler {
 	
-	public static Item enchant(Item item, int level) {
+	public static void enchant(Item item, int level, Player player) {
 		
 		Material itemType = item.getMaterial();
 		
@@ -26,8 +29,17 @@ public class EnchantmentHandler {
 			}
 		}
 		
+		for (String enchant : ConfigurationHandler.getEnchants()) {
+			for (String lore : item.getLore()) {
+				if (lore.contains(ConfigurationHandler.getLore(enchant))) {
+					System.out.println(enchant);
+					enchants.remove(enchant);
+				}
+			}
+		}
+		
 		if (enchants.size() == 0) {
-			return item;
+			return;
 		}
 		
 		//Max chance.
@@ -78,20 +90,20 @@ public class EnchantmentHandler {
 		
 		enchantmentLevel = randomNumberGenerator.nextInt(max) + low;
 		
-		System.out.println("Name: " + enchantName);
-		System.out.println("Level: " + enchantmentLevel);
-		
+		ItemStack tmp = item.getItemStack();
 		item = addEnchant(item, enchantName, enchantmentLevel);
 		
-		return item;
+		player.getInventory().remove(tmp);
+		player.getInventory().addItem(item.getItemStack());
+		
 	}
 
 	private static Item addEnchant(Item item, String enchant, int level) {
 		if (isDefaultEnchantment(enchant)) {
 			item.addEnchant(Enchantment.getByName(enchant), level);
 		} else {
-			item.setName(ConfigurationHandler.getName(enchant + " " + level));
-			item.addLore(ConfigurationHandler.getLore(enchant));
+			String lore = ChatColor.translateAlternateColorCodes('&', ConfigurationHandler.getLore(enchant) + " &r" + level);
+			item.addLore(lore);
 		}
 		 
 		return item;
