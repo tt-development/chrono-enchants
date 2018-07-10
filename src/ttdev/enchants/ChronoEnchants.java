@@ -40,7 +40,7 @@ public class ChronoEnchants extends JavaPlugin {
         
         Player player = (Player) sender;
         
-        if (label.equalsIgnoreCase("enchant")) {
+        if (label.equalsIgnoreCase("cenchant")) {
         	if (args.length == 1) {
             	if (args[0].equalsIgnoreCase("reload")) {
             		reloadConfig();
