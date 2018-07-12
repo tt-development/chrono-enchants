@@ -2,6 +2,7 @@ name: Chrono Enchants
 main: ttdev.enchants.ChronoEnchants
 authors: [Thomas, Tre]
 version: 1.0
+depend: [API]
 commands:
    cenchant:
       description: Test command.

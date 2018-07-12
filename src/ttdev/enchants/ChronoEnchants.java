@@ -1,11 +1,13 @@
 package ttdev.enchants;
 
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import net.md_5.bungee.api.ChatColor;
+import ttdev.enchants.api.event.InteractEventDispatcher;
+import ttdev.enchants.events.EnchantTableInteract;
 
 public class ChronoEnchants extends JavaPlugin {
 
@@ -22,11 +24,18 @@ public class ChronoEnchants extends JavaPlugin {
 		this.saveConfig();
 				
 		singleton = this;
+
+		PluginManager manager = getServer().getPluginManager();
+		manager.registerEvents(new InteractEventDispatcher(), this);
+		manager.registerEvents(new EnchantTableInteract(), this);
+
+		getLogger().info(getName()+" enabled.");
 	}
 	
 	@Override
 	public void onDisable() {
 		this.saveConfig();
+		getLogger().info(getName()+" disabled.");
 	}
 	
     @Override
