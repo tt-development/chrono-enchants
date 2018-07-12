@@ -20,24 +20,28 @@ public class EnchantmentHandler {
 		
 		//All posible enchants.
 		ArrayList<String> enchants = new ArrayList<String>(); 
-		
+
+		/* add enchants applicable to item to enchants arraylist */
 		for (String enchant : ConfigurationHandler.getEnchants()) {
 			if (ConfigurationHandler.getPossibleItems(enchant).contains(itemType.toString())) {
-				if (!enchants.contains("enchant") & ConfigurationHandler.getChance(enchant, level) != 0 & ConfigurationHandler.getMaxLevel(enchant, level) != 0) {
+				if (!enchants.contains(enchant) && ConfigurationHandler.getChance(enchant, level) != 0 && ConfigurationHandler.getMaxLevel(enchant, level) != 0) {
 					enchants.add(enchant);
+					System.out.println("Added enchant "+enchant);
 				}
 			}
 		}
-		
-		for (String enchant : ConfigurationHandler.getEnchants()) {
-			for (String lore : item.getLore()) {
-				if (lore.contains(ConfigurationHandler.getLore(enchant))) {
-					System.out.println(enchant);
-					enchants.remove(enchant);
+
+		/* remove enchantments the item already has */
+		if(item.hasLore()) {
+			for (String enchant : ConfigurationHandler.getEnchants()) {
+				for (String lore : item.getLore()) {
+					if (lore.contains(ConfigurationHandler.getLore(enchant))) {
+						enchants.remove(enchant);
+					}
 				}
 			}
 		}
-		
+
 		if (enchants.size() == 0) {
 			return;
 		}
