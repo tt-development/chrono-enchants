@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import ttdev.enchants.InventoryManager;
 import ttdev.enchants.api.event.TableInteractEvent;
 
-public final class EnchantTableInteract implements Listener {
+public final class EnchantTableInteractListener implements Listener {
 
     @EventHandler
     public void onEnchantTableInteract(TableInteractEvent event) {

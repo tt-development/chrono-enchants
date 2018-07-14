@@ -6,8 +6,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import ttdev.enchants.api.event.InteractEventDispatcher;
-import ttdev.enchants.events.EnchantTableInteract;
+import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
+import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
+import ttdev.enchants.events.EnchantTableInteractListener;
+import ttdev.enchants.events.PlayerHitEntityListener;
 
 public class ChronoEnchants extends JavaPlugin {
 
@@ -26,8 +28,12 @@ public class ChronoEnchants extends JavaPlugin {
 		singleton = this;
 
 		PluginManager manager = getServer().getPluginManager();
+		/* register api listeners */
 		manager.registerEvents(new InteractEventDispatcher(), this);
-		manager.registerEvents(new EnchantTableInteract(), this);
+		manager.registerEvents(new EntityHitEntityEventDispatcher(), this);
+		/* register implementation listeners */
+		manager.registerEvents(new EnchantTableInteractListener(), this);
+		manager.registerEvents(new PlayerHitEntityListener(),this);
 
 		getLogger().info(getName()+" enabled.");
 	}

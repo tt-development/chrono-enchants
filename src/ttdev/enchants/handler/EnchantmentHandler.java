@@ -1,16 +1,15 @@
 package ttdev.enchants.handler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
 import ttdev.api.user.items.Item;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
 
 public class EnchantmentHandler {
 	
@@ -26,7 +25,7 @@ public class EnchantmentHandler {
 			if (ConfigurationHandler.getPossibleItems(enchant).contains(itemType.toString())) {
 				if (!enchants.contains(enchant) && ConfigurationHandler.getChance(enchant, level) != 0 && ConfigurationHandler.getMaxLevel(enchant, level) != 0) {
 					enchants.add(enchant);
-					System.out.println("Added enchant "+enchant);
+					System.out.println("Added enchantment "+enchant);
 				}
 			}
 		}
@@ -52,7 +51,7 @@ public class EnchantmentHandler {
 			maxChance = maxChance + ConfigurationHandler.getChance(enchants.get(i), level);
 		}
 		
-		//Pick the enchant.
+		//Pick the enchantment.
 		Random randomNumberGenerator = new Random();
 		int random = randomNumberGenerator.nextInt(maxChance) + 1;
 		
@@ -86,7 +85,7 @@ public class EnchantmentHandler {
 			}
 		}
 		
-		//Pick the level of the enchant.
+		//Pick the level of the enchantment.
 		int enchantmentLevel = 1;
 		
 		int low = ConfigurationHandler.getBaseLevel(enchantName);

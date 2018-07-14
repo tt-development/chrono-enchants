@@ -1,8 +1,8 @@
 package ttdev.enchants.handler;
 
-import java.util.List;
-
 import ttdev.enchants.ChronoEnchants;
+
+import java.util.List;
 
 public class ConfigurationHandler {
 
@@ -33,7 +33,7 @@ public class ConfigurationHandler {
 		
 		String name = ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + ".name");
 		return name;
-		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + "name"));
+		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchantment + "name"));
 	}
 	
 	public static String getLore(String enchant) {
@@ -43,7 +43,7 @@ public class ConfigurationHandler {
 		
 		String lore = ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + ".lore");
 		return lore;
-		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + "lore"));
+		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchantment + "lore"));
 	}
 	
 	public static List<String> getPossibleItems(String enchant) {
