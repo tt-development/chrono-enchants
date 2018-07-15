@@ -33,7 +33,7 @@ public class ConfigurationHandler {
 		
 		String name = ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + ".name");
 		return name;
-		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchantment + "name"));
+		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + "name"));
 	}
 	
 	public static String getLore(String enchant) {
@@ -43,7 +43,7 @@ public class ConfigurationHandler {
 		
 		String lore = ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + ".lore");
 		return lore;
-		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchantment + "lore"));
+		//return ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchants." + enchant + "lore"));
 	}
 	
 	public static List<String> getPossibleItems(String enchant) {

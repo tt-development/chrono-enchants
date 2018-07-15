@@ -11,5 +11,5 @@ public abstract class AgressiveEnchant<EntityOneT, EntityTwoT> extends AbstractE
     @Override
     public abstract boolean containsEnchant(ItemStack itemStack);
 
-    public abstract void fire(EntityOneT entityOne, EntityTwoT entityTwo);
+    public abstract void fire(EntityOneT entityOne, EntityTwoT entityTwo, int level);
 }

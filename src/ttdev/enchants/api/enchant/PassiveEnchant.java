@@ -19,13 +19,12 @@ public abstract class PassiveEnchant<EntityT> extends AbstractEnchant {
     @Override
     public abstract boolean containsEnchant(ItemStack itemStack);
 
-    public abstract void fire(EntityT entity);
+    public abstract void fire(EntityT entity, int level);
 
     private static class Ticker {
 
         private final long tickRate = 20;
 
-        //TODO Refactor class
         void startTicking() {
             new BukkitRunnable() {
                 @Override
@@ -35,7 +34,7 @@ public abstract class PassiveEnchant<EntityT> extends AbstractEnchant {
                         ItemStack[] armor = p.getInventory().getArmorContents();
                         Arrays.stream(armor).forEach(is -> {
                             if (Enchant.TRIFECTA.containsEnchant(is)) {
-                                Enchant.TRIFECTA.fire(p);
+                                Enchant.TRIFECTA.fire(p,0);
                             }
                         });
                     });

@@ -16,6 +16,6 @@ public class Marshmallow extends AgressiveEnchant<LivingEntity, LivingEntity> {
     }
 
     @Override
-    public void fire(LivingEntity entityOne, LivingEntity entityTwo) {
+    public void fire(LivingEntity entityOne, LivingEntity entityTwo,int level) {
     }
 }
