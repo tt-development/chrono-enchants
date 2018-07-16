@@ -12,8 +12,17 @@ import java.util.Collection;
 
 public abstract class PassiveEnchant<EntityT> extends AbstractEnchant {
 
+    private static Ticker ticker;
+
     public PassiveEnchant(String id) {
         super(id);
+        ticker=new Ticker();
+        if (!ticker.isStarted()) {
+            System.out.println("Starting Ticker.");
+            ticker.start();
+        }
+        System.out.println("Initialized new PassiveEnchant");
+        System.out.println("Ticker: "+ticker.started);
     }
 
     @Override
@@ -23,23 +32,32 @@ public abstract class PassiveEnchant<EntityT> extends AbstractEnchant {
 
     private static class Ticker {
 
+        private boolean started = false;
         private final long tickRate = 20;
 
-        void startTicking() {
+        boolean isStarted() {
+            return started;
+        }
+
+        void start() {
             new BukkitRunnable() {
                 @Override
                 public void run() {
+                    started = true;
                     Collection<? extends Player> playerList = Bukkit.getOnlinePlayers();
                     playerList.forEach(p -> {
                         ItemStack[] armor = p.getInventory().getArmorContents();
                         Arrays.stream(armor).forEach(is -> {
                             if (Enchant.TRIFECTA.containsEnchant(is)) {
-                                Enchant.TRIFECTA.fire(p,0);
+                                Enchant.TRIFECTA.fire(p, 0);
+                                System.out.println("Firing TRIFECTA for "+p.getName());
                             }
                         });
                     });
+                    System.out.println("Timer run");
                 }
             }.runTaskTimer(ChronoEnchants.getInstance(), tickRate, tickRate);
+            System.out.println("Start method called in PassiveEnchant");
         }
     }
 }

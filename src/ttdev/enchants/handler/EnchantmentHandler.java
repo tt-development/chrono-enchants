@@ -98,7 +98,8 @@ public class EnchantmentHandler {
 		
 		player.getInventory().remove(tmp);
 		player.getInventory().addItem(item.getItemStack());
-		
+
+		player.sendMessage("Added "+enchantName+" to "+item.getName());
 	}
 
 	private static Item addEnchant(Item item, String enchant, int level) {
