@@ -1,23 +1,21 @@
 package ttdev.enchants.enchant;
 
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import ttdev.api.user.items.Item;
 import ttdev.enchants.api.enchant.PassiveEnchant;
 import ttdev.enchants.handler.ConfigurationHandler;
 
 public class Trifecta extends PassiveEnchant<LivingEntity> {
 
     public Trifecta() {
-        super("trifecta");
+        super("trifecta", EnchantEnum.TRIFECTA);
     }
 
     @Override
-    public boolean containsEnchant(ItemStack itemStack) {
-        ItemMeta meta=itemStack.getItemMeta();
-        return meta.getLore().contains(ConfigurationHandler.getName("Trifecta"));
+    public boolean hasEnchant(Item item) {
+        return item.getLore().contains(ConfigurationHandler.getName("Trifecta"));
     }
 
     @Override

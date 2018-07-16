@@ -4,6 +4,6 @@ authors: [Thomas, Tre]
 version: 1.0
 depend: [API]
 commands:
-   cenchant:
-      description: Test command.
-      usage: /<command>
+  cenchant:
+    description: Test command.
+    usage: /<command>
