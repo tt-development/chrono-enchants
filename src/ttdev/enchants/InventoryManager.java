@@ -29,24 +29,24 @@ public class InventoryManager implements InventoryListener {
 
 		//TODO Config support.
 		Item level5 = new Item(Material.COAL);
-		level5.addLore("LORE");
-		level5.setName("NAME");
+		level5.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-lore")));
+		level5.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-name")));
 
 		Item level15 = new Item(Material.IRON_ORE);
-		level15.addLore("LORE");
-		level15.setName("NAME");
+		level15.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-lore")));
+		level15.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-name")));
 
 		Item level30 = new Item(Material.GOLD_ORE);
-		level30.addLore("LORE");
-		level30.setName("NAME");
+		level30.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-lore")));
+		level30.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-name")));
 
 		Item level45 = new Item(Material.DIAMOND_ORE);
-		level45.addLore("LORE");
-		level45.setName("NAME");
+		level45.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-lore")));
+		level45.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-name")));
 
 		Item level60 = new Item(Material.EMERALD_ORE);
-		level60.addLore("LORE");
-		level60.setName("NAME");
+		level60.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-lore")));
+		level60.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-name")));
 
 		Item filler = new Item(Material.STAINED_GLASS_PANE);
 		filler.setName("ChronoEnchants");
@@ -114,6 +114,7 @@ public class InventoryManager implements InventoryListener {
 				player.closeInventory();
 			}
 			else {
+				return;
 				/* Do nothing */
 			}
 		}
