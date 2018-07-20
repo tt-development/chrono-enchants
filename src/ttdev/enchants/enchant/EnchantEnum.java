@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 public enum EnchantEnum {
 
-    TRIFECTA(new Trifecta(), "trifecta", true);
+    TRIFECTA(new Trifecta(), "trifecta", true),
+    MARATHON(new Marathon(), "marathon", true);
 
     private AbstractEnchant enchant;
     private String id;

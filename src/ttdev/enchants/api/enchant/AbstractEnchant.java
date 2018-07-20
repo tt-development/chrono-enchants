@@ -19,6 +19,10 @@ public abstract class AbstractEnchant {
 
     public abstract boolean hasEnchant(Item item);
 
+    public String getId() {
+        return id;
+    }
+
     public EnchantEnum getType() {
         return type;
     }

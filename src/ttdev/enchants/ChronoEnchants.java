@@ -61,7 +61,7 @@ public class ChronoEnchants extends JavaPlugin {
         /* Used for testing enchantments without enchanting an item */
         if (label.equalsIgnoreCase("ctestench")) {
             if (args.length < 2) {
-                player.sendMessage("You must specify an enchantment you would like to test.");
+                player.sendMessage(ChatColor.RED+"Incorrect syntax.");
                 return true;
             }
             EnchantEnum enchant = EnchantEnum.getEnchant(args[0]);
@@ -75,7 +75,8 @@ public class ChronoEnchants extends JavaPlugin {
                 return true;
             }
             passiveEnchant = (PassiveEnchant) enchant.getEnchant();
-            passiveEnchant.fire(player, 1);
+            passiveEnchant.fire(player, Integer.parseInt(args[1]));
+            player.sendMessage("Testing enchant "+passiveEnchant.getId()+".");
         }
 
         if (label.equalsIgnoreCase("cenchant"))

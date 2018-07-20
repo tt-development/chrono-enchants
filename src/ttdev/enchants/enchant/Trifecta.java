@@ -20,6 +20,7 @@ public class Trifecta extends PassiveEnchant<LivingEntity> {
 
     @Override
     public void fire(LivingEntity entity,int level) {
+        //TODO Modify to fit correctly with PassiveEnchantTicker tick time
         entity.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 1, false, false));
     }
 

@@ -50,18 +50,3 @@ enchants:
     lvl_60_maxLevel: 1
     lore: '&eTrifecta'
     name: Trifecta
-  Marshmallow:
-    item:
-    - DIAMOND_HELMET
-    lvl_5_chance: 1
-    lvl_15_chance: 0
-    lvl_30_chance: 3
-    lvl_45_chance: 4
-    lvl_60_chance: 5
-    lvl_5_maxLevel: 1
-    lvl_15_maxLevel: 0
-    lvl_30_maxLevel: 1
-    lvl_45_maxLevel: 1
-    lvl_60_maxLevel: 1
-    lore: '&eMarshmallow'
-    name: Marshmallow
