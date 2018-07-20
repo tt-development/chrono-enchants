@@ -4,6 +4,9 @@ authors: [Thomas, Tre]
 version: 1.0
 depend: [API]
 commands:
+  ctestench:
+    description: Test an enchantment on yourself.
+    usage: /ctestench <level>
   cenchant:
     description: Test command.
     usage: /<command>

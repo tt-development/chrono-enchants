@@ -6,47 +6,49 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import ttdev.enchants.api.enchant.PassiveEnchant;
 import ttdev.enchants.api.enchant.PassiveEnchantTicker;
 import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
 import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
+import ttdev.enchants.enchant.EnchantEnum;
 import ttdev.enchants.events.EnchantTableInteractListener;
 import ttdev.enchants.events.PlayerHitEntityListener;
 
 public class ChronoEnchants extends JavaPlugin {
 
-	private static ChronoEnchants singleton;
+    private static ChronoEnchants singleton;
 
-	public static ChronoEnchants getInstance() {
-		return singleton;
-	}
-	
-	@Override
-	public void onEnable() {
-		
-		this.getConfig().options().copyDefaults(true);
-		this.saveConfig();
-				
-		singleton = this;
+    public static ChronoEnchants getInstance() {
+        return singleton;
+    }
 
-		PluginManager manager = getServer().getPluginManager();
-		/* register api listeners */
-		manager.registerEvents(new InteractEventDispatcher(), this);
-		manager.registerEvents(new EntityHitEntityEventDispatcher(), this);
-		/* register implementation listeners */
-		manager.registerEvents(new EnchantTableInteractListener(), this);
-		manager.registerEvents(new PlayerHitEntityListener(),this);
+    @Override
+    public void onEnable() {
 
-		new PassiveEnchantTicker().startTicking();
+        this.getConfig().options().copyDefaults(true);
+        this.saveConfig();
 
-		getLogger().info(getName()+" enabled.");
-	}
-	
-	@Override
-	public void onDisable() {
-		this.saveConfig();
-		getLogger().info(getName()+" disabled.");
-	}
-	
+        singleton = this;
+
+        PluginManager manager = getServer().getPluginManager();
+        /* register api listeners */
+        manager.registerEvents(new InteractEventDispatcher(), this);
+        manager.registerEvents(new EntityHitEntityEventDispatcher(), this);
+        /* register implementation listeners */
+        manager.registerEvents(new EnchantTableInteractListener(), this);
+        manager.registerEvents(new PlayerHitEntityListener(), this);
+
+        new PassiveEnchantTicker().startTicking();
+
+        getLogger().info(getName() + " enabled.");
+    }
+
+    @Override
+    public void onDisable() {
+        this.saveConfig();
+        getLogger().info(getName() + " disabled.");
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
@@ -56,19 +58,40 @@ public class ChronoEnchants extends JavaPlugin {
 
         Player player = (Player) sender;
 
-        if (label.equalsIgnoreCase("cenchant")) {
-        	if (args.length == 1) {
-            	if (args[0].equalsIgnoreCase("reload")) {
-            		reloadConfig();
-            		player.sendMessage(ChatColor.GREEN + "Reloaded the config.");
-            		return true;
-            	}
-        	}
-        	InventoryManager.openInventory(player);
+        /* Used for testing enchantments without enchanting an item */
+        if (label.equalsIgnoreCase("ctestench")) {
+            if (args.length < 2) {
+                player.sendMessage("You must specify an enchantment you would like to test.");
+                return true;
+            }
+            EnchantEnum enchant = EnchantEnum.getEnchant(args[0]);
+            if (enchant == null) {
+                player.sendMessage(ChatColor.RED + "Couldn't find enchant with name " + args[0] + ".");
+                return true;
+            }
+            PassiveEnchant<Player> passiveEnchant;
+            if (!enchant.isPassive()) {
+                player.sendMessage(ChatColor.RED + "You can only test passive enchants.");
+                return true;
+            }
+            passiveEnchant = (PassiveEnchant) enchant.getEnchant();
+            passiveEnchant.fire(player, 1);
         }
-        
-        return true;
-        
-    }
 
+        if (label.equalsIgnoreCase("cenchant"))
+
+        {
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("reload")) {
+                    reloadConfig();
+                    player.sendMessage(ChatColor.GREEN + "Reloaded the config.");
+                    return true;
+                }
+            }
+            InventoryManager.openInventory(player);
+        }
+
+        return true;
+
+    }
 }

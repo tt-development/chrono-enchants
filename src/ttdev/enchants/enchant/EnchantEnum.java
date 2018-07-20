@@ -2,6 +2,8 @@ package ttdev.enchants.enchant;
 
 import ttdev.enchants.api.enchant.AbstractEnchant;
 
+import java.util.Arrays;
+
 public enum EnchantEnum {
 
     TRIFECTA(new Trifecta(), "trifecta", true);
@@ -18,6 +20,17 @@ public enum EnchantEnum {
 
     public <EnchantT extends AbstractEnchant> EnchantT getEnchant(Class<EnchantT> clazz) {
         return clazz.cast(enchant);
+    }
+
+    public static EnchantEnum getEnchant(String enchant){
+        return Arrays.stream(values())
+                .filter(e ->e.id.equalsIgnoreCase(enchant))
+                .findAny()
+                .orElse(null);
+    }
+
+    public AbstractEnchant getEnchant(){
+        return enchant;
     }
 
     public String getId() {
