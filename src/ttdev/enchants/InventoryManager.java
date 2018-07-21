@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-
 import org.bukkit.inventory.ItemStack;
 import ttdev.api.bukkit.Manager;
 import ttdev.api.user.inventory.AInventory;
@@ -29,24 +28,24 @@ public class InventoryManager implements InventoryListener {
 
 		//TODO Config support.
 		Item level5 = new Item(Material.COAL);
-		level5.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-lore")));
-		level5.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-name")));
+		level5.addLore(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-lore")));
+		level5.setName(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level5-name")));
 
 		Item level15 = new Item(Material.IRON_ORE);
-		level15.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-lore")));
-		level15.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-name")));
+		level15.addLore(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-lore")));
+		level15.setName(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level15-name")));
 
 		Item level30 = new Item(Material.GOLD_ORE);
-		level30.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-lore")));
-		level30.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-name")));
+		level30.addLore(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-lore")));
+		level30.setName(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level30-name")));
 
 		Item level45 = new Item(Material.DIAMOND_ORE);
-		level45.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-lore")));
-		level45.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-name")));
+		level45.addLore(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-lore")));
+		level45.setName(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level45-name")));
 
 		Item level60 = new Item(Material.EMERALD_ORE);
-		level60.addLore(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-lore")));
-		level60.setName(ChatColor.translateAlternateColorCodes('$', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-name")));
+		level60.addLore(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-lore")));
+		level60.setName(ChatColor.translateAlternateColorCodes('&', ChronoEnchants.getInstance().getConfig().getString("enchantGui.level60-name")));
 
 		Item filler = new Item(Material.STAINED_GLASS_PANE);
 		filler.setName("ChronoEnchants");

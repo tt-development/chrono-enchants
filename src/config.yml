@@ -50,3 +50,15 @@ enchants:
     lvl_60_maxLevel: 1
     lore: '&eTrifecta'
     name: Trifecta
+
+enchantGui:
+  level5-lore: '&eLore'
+  level5-name: '&aName'
+  level15-name: '&aName'
+  level15-lore: '&eLore'
+  level30-name: '&aName'
+  level30-lore: '&eLore'
+  level45-name: '&aName'
+  level45-lore: '&eLore'
+  level60-lore: '&eLore'
+  level60-name: '&aName'
