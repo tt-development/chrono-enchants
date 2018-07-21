@@ -8,7 +8,8 @@ public enum EnchantEnum {
 
     TRIFECTA(new Trifecta(), "trifecta", true),
     MARATHON(new Marathon(), "marathon", true),
-    SENSE(new Sense(),"sense",true);
+    SENSE(new Sense(), "sense", true),
+    SEAR(new Sear(), "sear", true);
 
     private AbstractEnchant enchant;
     private String id;
@@ -24,14 +25,14 @@ public enum EnchantEnum {
         return clazz.cast(enchant);
     }
 
-    public static EnchantEnum getEnchant(String enchant){
+    public static EnchantEnum getEnchant(String enchant) {
         return Arrays.stream(values())
-                .filter(e ->e.id.equalsIgnoreCase(enchant))
+                .filter(e -> e.id.equalsIgnoreCase(enchant))
                 .findAny()
                 .orElse(null);
     }
 
-    public AbstractEnchant getEnchant(){
+    public AbstractEnchant getEnchant() {
         return enchant;
     }
 
