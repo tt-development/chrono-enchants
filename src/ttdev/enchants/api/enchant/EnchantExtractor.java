@@ -1,33 +1,43 @@
 package ttdev.enchants.api.enchant;
 
+import ttdev.api.APair;
 import ttdev.api.user.items.Item;
 import ttdev.enchants.enchant.EnchantEnum;
 
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EnchantExtractor {
 
-    EnchantExtractor() {
+    public EnchantExtractor() {
 
     }
 
-    public Set<EnchantEnum> extractPassive(Item item) {
-        Set<EnchantEnum> enchantSet = extract(item);
-        return enchantSet.stream().filter(EnchantEnum::isPassive).collect(Collectors.toSet());
+    public Set<APair<EnchantEnum,Integer>> extractPassive(Item item) {
+        Set<APair<EnchantEnum,Integer>> enchantSet = extract(item);
+        return enchantSet.stream().filter(pair->pair.getKey().isPassive()).collect(Collectors.toSet());
     }
 
-    public Set<EnchantEnum> extract(Item item) {
+    public Set<APair<EnchantEnum, Integer>> extract(Item item) {
         return item.getLore().stream()
                 .map(String::toLowerCase)
                 .map(this::collectEnchant)
                 .collect(Collectors.toSet());
     }
 
-    private EnchantEnum collectEnchant(String article) {
-        return Arrays.stream(EnchantEnum.values())
+    private APair<EnchantEnum, Integer> collectEnchant(String article) {
+        Optional<EnchantEnum> enchantOptional = Arrays.stream(EnchantEnum.values())
                 .filter(enchant -> article.contains(enchant.getId()))
-                .findFirst().orElse(null);
+                .findAny();
+
+        int level;
+        if(enchantOptional.isPresent()){
+            level=Integer.parseInt(article.split(" ")[1]);
+            return new APair<>(enchantOptional.get(),level);
+        }
+
+        return null;
     }
 }

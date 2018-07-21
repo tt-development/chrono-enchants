@@ -11,6 +11,7 @@ import ttdev.enchants.api.enchant.PassiveEnchantTicker;
 import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
 import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
 import ttdev.enchants.enchant.EnchantEnum;
+import ttdev.enchants.events.BlockBreakListener;
 import ttdev.enchants.events.EnchantTableInteractListener;
 import ttdev.enchants.events.PlayerHitEntityListener;
 
@@ -37,6 +38,7 @@ public class ChronoEnchants extends JavaPlugin {
         /* register implementation listeners */
         manager.registerEvents(new EnchantTableInteractListener(), this);
         manager.registerEvents(new PlayerHitEntityListener(), this);
+        manager.registerEvents(new BlockBreakListener(), this);
 
         new PassiveEnchantTicker().startTicking();
 
