@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
+import ttdev.api.APair;
 import ttdev.api.user.items.Item;
 import ttdev.enchants.ChronoEnchants;
 import ttdev.enchants.enchant.EnchantEnum;
@@ -32,8 +33,8 @@ public class PassiveEnchantTicker {
                             continue;
                         }
 
-                        Set<EnchantEnum> passiveEnchants = extractor.extractPassive(new Item(armorPiece));
-                        passiveEnchants.forEach(enchant -> enchant.getEnchant(PassiveEnchant.class).fire(player, 1));
+                        Set<APair<EnchantEnum,Integer>> passiveEnchants = extractor.extractPassive(new Item(armorPiece));
+                        passiveEnchants.forEach(enchant -> enchant.getKey().getEnchant(PassiveEnchant.class).fire(player, 1));
                     }
                 }
 
