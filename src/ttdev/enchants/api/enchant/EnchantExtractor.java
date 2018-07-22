@@ -1,5 +1,6 @@
 package ttdev.enchants.api.enchant;
 
+import org.bukkit.ChatColor;
 import ttdev.api.APair;
 import ttdev.api.user.items.Item;
 import ttdev.enchants.enchant.EnchantEnum;
@@ -28,13 +29,14 @@ public class EnchantExtractor {
     }
 
     private APair<EnchantEnum, Integer> collectEnchant(String article) {
+        final String strippedArticle= ChatColor.stripColor(article);
         Optional<EnchantEnum> enchantOptional = Arrays.stream(EnchantEnum.values())
-                .filter(enchant -> article.contains(enchant.getId()))
+                .filter(enchant -> strippedArticle.contains(enchant.getId()))
                 .findAny();
 
         int level;
         if(enchantOptional.isPresent()){
-            level=Integer.parseInt(article.split(" ")[1]);
+            level=Integer.parseInt(strippedArticle.split(" ")[1]);
             return new APair<>(enchantOptional.get(),level);
         }
 

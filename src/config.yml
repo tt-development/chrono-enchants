@@ -2,6 +2,7 @@ enabledEnchants:
   - Goggles
   - Fish
   - Trifecta
+  - Sear
 
 enchants:
   Goggles:
@@ -18,7 +19,7 @@ enchants:
     lvl_30_maxLevel: 1
     lvl_45_maxLevel: 1
     lvl_60_maxLevel: 1
-    lore: lore :)
+    lore: '&fGoggles'
     name: Goggles
   Fish:
     item:
@@ -50,15 +51,30 @@ enchants:
     lvl_60_maxLevel: 1
     lore: '&eTrifecta'
     name: Trifecta
+  Sear:
+    item:
+    - DIAMOND_PICKAXE
+    lvl_5_chance: 1
+    lvl_15_chance: 0
+    lvl_30_chance: 3
+    lvl_45_chance: 4
+    lvl_60_chance: 5
+    lvl_5_maxLevel: 1
+    lvl_15_maxLevel: 0
+    lvl_30_maxLevel: 1
+    lvl_45_maxLevel: 1
+    lvl_60_maxLevel: 1
+    lore: '&6Sear'
+    name: Sear
 
 enchantGui:
-  level5-lore: '&eLore'
-  level5-name: '&aName'
-  level15-name: '&aName'
-  level15-lore: '&eLore'
-  level30-name: '&aName'
-  level30-lore: '&eLore'
-  level45-name: '&aName'
-  level45-lore: '&eLore'
-  level60-lore: '&eLore'
-  level60-name: '&aName'
+  level5-lore: '&eLevel 5 enchant lore'
+  level5-name: '&aLevel 5 enchant name'
+  level15-name: '&aLevel 15 enchant name'
+  level15-lore: '&eLevel 15 enchant lore'
+  level30-name: '&aLevel 30 enchant name'
+  level30-lore: '&eLevel 30 enchant lore'
+  level45-name: '&aLevel 45 enchant name'
+  level45-lore: '&eLevel 45 enchant lore'
+  level60-name: '&aLevel 60 enchant name'
+  level60-lore: '&eLevel 60 enchant lore'

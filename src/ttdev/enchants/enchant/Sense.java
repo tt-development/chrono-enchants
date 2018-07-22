@@ -16,6 +16,7 @@ public class Sense extends PassiveEnchant<LivingEntity> {
 
     @Override
     public void fire(LivingEntity entity, int level) {
+        //TODO Implementation
         entity.sendMessage("You have sense on your tool.");
     }
 }

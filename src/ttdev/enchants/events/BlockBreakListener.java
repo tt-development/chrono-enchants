@@ -20,6 +20,8 @@ public class BlockBreakListener implements Listener {
 
         Set<APair<EnchantEnum, Integer>> enchantPairSet;
         enchantPairSet=extractor.extractPassive(new Item(event.getPlayer().getItemInHand()));
+
+        /* Fire all passive enchantments for breaking blocks */
         enchantPairSet.forEach(pair->((PassiveEnchant<BlockBreakEvent>)pair.getKey().getEnchant()).fire(event,pair.getValue()));
     }
 }
