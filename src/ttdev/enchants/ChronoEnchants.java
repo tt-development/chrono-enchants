@@ -1,23 +1,31 @@
 package ttdev.enchants;
 
-import net.md_5.bungee.api.ChatColor;
+import java.util.HashMap;
+import java.util.UUID;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import net.md_5.bungee.api.ChatColor;
 import ttdev.enchants.api.enchant.PassiveEnchant;
 import ttdev.enchants.api.enchant.PassiveEnchantTicker;
 import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
 import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
+import ttdev.enchants.api.user.User;
 import ttdev.enchants.enchant.EnchantEnum;
 import ttdev.enchants.events.BlockBreakListener;
 import ttdev.enchants.events.EnchantTableInteractListener;
 import ttdev.enchants.events.PlayerHitEntityListener;
+import ttdev.enchants.events.PlayerServerJoinListener;
 
 public class ChronoEnchants extends JavaPlugin {
 
     private static ChronoEnchants singleton;
+    
+    public static HashMap<UUID, User> users = new HashMap<>();
 
     public static ChronoEnchants getInstance() {
         return singleton;
@@ -39,6 +47,7 @@ public class ChronoEnchants extends JavaPlugin {
         manager.registerEvents(new EnchantTableInteractListener(), this);
         manager.registerEvents(new PlayerHitEntityListener(), this);
         manager.registerEvents(new BlockBreakListener(), this);
+        manager.registerEvents(new PlayerServerJoinListener(), this);
 
         new PassiveEnchantTicker().startTicking();
 

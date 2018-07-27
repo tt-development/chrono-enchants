@@ -17,7 +17,7 @@ public class EnchantmentHandler {
 		
 		Material itemType = item.getMaterial();
 		
-		//All posible enchants.
+		/* get all possible enchants */
 		ArrayList<String> enchants = new ArrayList<String>(); 
 
 		/* add enchants applicable to item to enchants arraylist */
@@ -25,7 +25,7 @@ public class EnchantmentHandler {
 			if (ConfigurationHandler.getPossibleItems(enchant).contains(itemType.toString())) {
 				if (!enchants.contains(enchant) && ConfigurationHandler.getChance(enchant, level) != 0 && ConfigurationHandler.getMaxLevel(enchant, level) != 0) {
 					enchants.add(enchant);
-					System.out.println("Added enchantment "+enchant);
+					System.out.println("Added enchantment " + enchant);
 				}
 			}
 		}
@@ -45,13 +45,13 @@ public class EnchantmentHandler {
 			return;
 		}
 		
-		//Max chance.
+		/* generate a max change */
 		int maxChance = 0;
 		for (int i=0; i < enchants.size(); i++) {
 			maxChance = maxChance + ConfigurationHandler.getChance(enchants.get(i), level);
 		}
 		
-		//Pick the enchantment.
+		/* pick the enchantment */
 		Random randomNumberGenerator = new Random();
 		int random = randomNumberGenerator.nextInt(maxChance) + 1;
 		
@@ -85,7 +85,7 @@ public class EnchantmentHandler {
 			}
 		}
 		
-		//Pick the level of the enchantment.
+		/* pick the level of the enchantment */
 		int enchantmentLevel = 1;
 		
 		int low = ConfigurationHandler.getBaseLevel(enchantName);
@@ -94,12 +94,13 @@ public class EnchantmentHandler {
 		enchantmentLevel = randomNumberGenerator.nextInt(max) + low;
 		
 		ItemStack tmp = item.getItemStack();
+		tmp.setAmount(1);
 		item = addEnchant(item, enchantName, enchantmentLevel);
 		
 		player.getInventory().remove(tmp);
 		player.getInventory().addItem(item.getItemStack());
 
-		player.sendMessage("Added "+enchantName+" to "+item.getName());
+		player.sendMessage("Added " + enchantName + " to " + item.getName());
 	}
 
 	private static Item addEnchant(Item item, String enchant, int level) {

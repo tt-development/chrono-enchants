@@ -8,7 +8,7 @@ import ttdev.enchants.api.enchant.PassiveEnchant;
 
 public class Marathon extends PassiveEnchant<LivingEntity> {
 
-    private final int duration = 20 * 3;
+	private final int duration = 20 * 3;
 
     public Marathon() {
         super("marathon", EnchantEnum.MARATHON);

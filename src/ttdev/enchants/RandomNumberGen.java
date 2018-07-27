@@ -2,7 +2,7 @@ package ttdev.enchants;
 
 import java.util.Random;
 
-public class NumberGen {
+public class RandomNumberGen {
 
 	public static boolean generate(int chance) {
 		Random random = new Random();

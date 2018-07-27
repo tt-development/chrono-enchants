@@ -9,7 +9,8 @@ public enum EnchantEnum {
     TRIFECTA(new Trifecta(), "trifecta", true),
     MARATHON(new Marathon(), "marathon", true),
     SENSE(new Sense(), "sense", true),
-    SEAR(new Sear(), "sear", true);
+    SEAR(new Sear(), "sear", true),
+	CONCRETE(new Concrete(), "concrete", true);
 
     private AbstractEnchant enchant;
     private String id;

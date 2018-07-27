@@ -86,7 +86,7 @@ public class InventoryManager implements InventoryListener {
 
 			if (enchantingItem == null) {
 				player.playSound(player.getLocation(), Sound.ANVIL_LAND,1.0f,1.0f);
-				player.sendMessage(ChatColor.RED+"You must place an item on the table first");
+				player.sendMessage(ChatColor.RED + "You must place an item on the table first");
 				return;
 			}
 
