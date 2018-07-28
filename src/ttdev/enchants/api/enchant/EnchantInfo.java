@@ -9,7 +9,7 @@ import java.util.*;
 
 public class EnchantInfo {
 
-    private final Map<GenericEnchant<?>, Integer> enchants = new HashMap<>();
+    private final Map<GenericEnchant, Integer> enchants = new HashMap<>();
 
     private EnchantInfo(ItemStack item, Filter filter) {
 
@@ -67,7 +67,7 @@ public class EnchantInfo {
         return new EnchantInfo(item, new Filter(triggers));
     }
 
-    public Map<GenericEnchant<?>, Integer> getEnchants() {
+    public Map<GenericEnchant, Integer> getEnchants() {
         return enchants;
     }
 
