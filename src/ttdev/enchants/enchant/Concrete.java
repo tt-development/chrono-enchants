@@ -1,5 +1,6 @@
 package ttdev.enchants.enchant;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -10,9 +11,10 @@ import ttdev.enchants.api.enchant.EnchantTrigger;
 import ttdev.enchants.api.enchant.GenericEnchant;
 
 public class Concrete extends GenericEnchant<LivingEntity> {
-	
+
 	public Concrete() {
 		super("concrete", EnchantTrigger.INFLICT_DAMAGE);
+		super.setDisplayName(ChatColor.GRAY+"Concrete");
 		super.setDuration(20 * 3);
 	}
 
@@ -30,7 +32,7 @@ public class Concrete extends GenericEnchant<LivingEntity> {
 			case 2:
 				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 1, false, false));
 				break;
-			case 3: 
+			case 3:
 				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 2, false, false));
 				break;
 		}

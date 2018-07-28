@@ -1,5 +1,6 @@
 package ttdev.enchants.enchant;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -11,6 +12,7 @@ public class Trifecta extends GenericEnchant<Void> {
 
     public Trifecta() {
         super("trifecta", EnchantTrigger.NONE);
+        super.setDisplayName(ChatColor.AQUA+"Trifecta");
     }
 
     @Override

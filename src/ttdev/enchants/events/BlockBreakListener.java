@@ -17,7 +17,7 @@ public class BlockBreakListener implements Listener {
         ItemStack item = event.getPlayer().getItemInHand();
 
         /* Fire all passive enchantments for breaking blocks */
-        EnchantInfo info = EnchantInfo.of(event.getPlayer().getItemInHand(), EnchantTrigger.BREAK_BLOCK);
+        EnchantInfo info = EnchantInfo.of(event.getPlayer().getItemInHand(), EnchantTrigger.BLOCK_BREAK);
         info.getEnchants().forEach((enchant, level) -> enchant.trigger(item, level, player, event));
     }
 }

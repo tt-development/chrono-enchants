@@ -85,7 +85,7 @@ public class ChronoEnchants extends JavaPlugin {
                 return true;
             }
             enchant.trigger(player.getItemInHand(), Integer.parseInt(args[1]), player, null);
-            player.sendMessage("Testing enchant " + enchant.getFancyName() + ".");
+            player.sendMessage("Testing enchant " + enchant.getDisplayName() + ".");
         }
 
         if (label.equalsIgnoreCase("cenchant")) {

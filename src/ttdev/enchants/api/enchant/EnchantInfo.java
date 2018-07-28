@@ -35,7 +35,7 @@ public class EnchantInfo {
                     }
                 }
 
-                if (str.contains(enchant.getFancyName())) {
+                if (str.contains(enchant.getDisplayName())) {
                     String[] split = str.split(" ");
                     int level = Integer.parseInt(split[1].trim());
                     enchants.put(enchant, level);

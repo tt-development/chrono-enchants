@@ -1,5 +1,6 @@
 package ttdev.enchants.enchant;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import ttdev.enchants.api.enchant.EnchantTrigger;
@@ -9,6 +10,7 @@ public class Sense extends GenericEnchant<Void> {
 
     public Sense() {
         super("sense", EnchantTrigger.NONE);
+        super.setDisplayName(ChatColor.WHITE+"Sense");
     }
 
     @Override

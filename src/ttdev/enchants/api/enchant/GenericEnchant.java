@@ -9,7 +9,7 @@ import java.util.Set;
 public abstract class GenericEnchant<ObjectType> {
 
     private String name;
-    private String fancyName;
+    private String displayName;
     private Set<EnchantTrigger> triggers;
 
     /* Some enchantments may want to use a duration */
@@ -17,14 +17,14 @@ public abstract class GenericEnchant<ObjectType> {
 
     public GenericEnchant(String name, EnchantTrigger... triggers) {
         this.name = name;
-        this.fancyName = name;
+        this.displayName = name;
         this.triggers = Sets.newHashSet(triggers);
     }
 
     /**
      * @param item       Item containing the enchantment.
      * @param player     Entity wearing or holding the <code>item</code>.
-     * @param objectType Entity or block interacted with.
+     * @param objectType Object, Entity, or Block of interest.
      */
     public abstract void trigger(ItemStack item, int level, Player player, ObjectType objectType);
 
@@ -32,12 +32,12 @@ public abstract class GenericEnchant<ObjectType> {
         return name;
     }
 
-    public String getFancyName() {
-        return fancyName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setFancyName(String fancyName) {
-        this.fancyName = fancyName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public Set<EnchantTrigger> getTriggers() {

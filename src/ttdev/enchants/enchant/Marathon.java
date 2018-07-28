@@ -1,5 +1,6 @@
 package ttdev.enchants.enchant;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -12,6 +13,7 @@ public class Marathon extends GenericEnchant<Void> {
 
     public Marathon() {
         super("marathon", EnchantTrigger.NONE);
+        super.setDisplayName(ChatColor.YELLOW+"Marathon");
         super.setDuration(20 * 6);
     }
 

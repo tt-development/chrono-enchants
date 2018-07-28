@@ -1,5 +1,6 @@
 package ttdev.enchants.enchant;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -11,7 +12,8 @@ import ttdev.enchants.api.enchant.GenericEnchant;
 public class Sear extends GenericEnchant<BlockBreakEvent> {
 
     public Sear() {
-        super("sear", EnchantTrigger.BREAK_BLOCK);
+        super("sear", EnchantTrigger.BLOCK_BREAK);
+        super.setDisplayName(ChatColor.GOLD+"Sear");
     }
 
     @Override
