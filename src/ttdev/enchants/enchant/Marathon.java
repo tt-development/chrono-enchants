@@ -1,33 +1,31 @@
 package ttdev.enchants.enchant;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.PassiveEnchant;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Marathon extends PassiveEnchant<LivingEntity> {
+public class Marathon extends GenericEnchant<Void> {
 
-	private final int duration = 20 * 3;
 
     public Marathon() {
-        super("marathon", EnchantEnum.MARATHON);
+        super("marathon", EnchantTrigger.NONE);
+        super.setDuration(20 * 6);
     }
 
     @Override
-    public boolean hasEnchant(Item item) {
-        return false;
-    }
+    public void trigger(ItemStack itemStack, int level, Player player, Void v) {
 
-    @Override
-    public void fire(LivingEntity entity, int level) {
         PotionEffectType speedEffect = PotionEffectType.SPEED;
+
         switch (level) {
             case 1:
-                entity.addPotionEffect(new PotionEffect(speedEffect, duration, 0, false, false));
+                player.addPotionEffect(new PotionEffect(speedEffect, super.getDuration(), 0, false, false));
                 break;
             case 2:
-                entity.addPotionEffect(new PotionEffect(speedEffect, duration, 1, false, false));
+                player.addPotionEffect(new PotionEffect(speedEffect, super.getDuration(), 1, false, false));
                 break;
         }
     }

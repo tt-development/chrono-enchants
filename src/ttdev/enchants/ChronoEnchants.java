@@ -1,16 +1,13 @@
 package ttdev.enchants;
 
-import java.util.HashMap;
-import java.util.UUID;
-
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import net.md_5.bungee.api.ChatColor;
-import ttdev.enchants.api.enchant.PassiveEnchant;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 import ttdev.enchants.api.enchant.PassiveEnchantTicker;
 import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
 import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
@@ -21,10 +18,13 @@ import ttdev.enchants.events.EnchantTableInteractListener;
 import ttdev.enchants.events.PlayerHitEntityListener;
 import ttdev.enchants.events.PlayerServerJoinListener;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 public class ChronoEnchants extends JavaPlugin {
 
     private static ChronoEnchants singleton;
-    
+
     public static HashMap<UUID, User> users = new HashMap<>();
 
     public static ChronoEnchants getInstance() {
@@ -72,27 +72,23 @@ public class ChronoEnchants extends JavaPlugin {
         /* Used for testing enchantments without enchanting an item */
         if (label.equalsIgnoreCase("ctestench")) {
             if (args.length < 2) {
-                player.sendMessage(ChatColor.RED+"Incorrect syntax.");
+                player.sendMessage(ChatColor.RED + "Incorrect syntax.");
                 return true;
             }
-            EnchantEnum enchant = EnchantEnum.getEnchant(args[0]);
+            GenericEnchant<?> enchant = EnchantEnum.getEnchant(args[0]);
             if (enchant == null) {
                 player.sendMessage(ChatColor.RED + "Couldn't find enchant with name " + args[0] + ".");
                 return true;
             }
-            PassiveEnchant<Player> passiveEnchant;
-            if (!enchant.isPassive()) {
+            if (!enchant.getTriggers().contains(EnchantTrigger.NONE)) {
                 player.sendMessage(ChatColor.RED + "You can only test passive enchants.");
                 return true;
             }
-            passiveEnchant = (PassiveEnchant) enchant.getEnchant();
-            passiveEnchant.fire(player, Integer.parseInt(args[1]));
-            player.sendMessage("Testing enchant "+passiveEnchant.getId()+".");
+            enchant.trigger(player.getItemInHand(), Integer.parseInt(args[1]), player, null);
+            player.sendMessage("Testing enchant " + enchant.getFancyName() + ".");
         }
 
-        if (label.equalsIgnoreCase("cenchant"))
-
-        {
+        if (label.equalsIgnoreCase("cenchant")) {
             if (args.length == 1) {
                 if (args[0].equalsIgnoreCase("reload")) {
                     reloadConfig();

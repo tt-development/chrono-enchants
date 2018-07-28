@@ -1,27 +1,23 @@
 package ttdev.enchants.events;
 
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import ttdev.api.APair;
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.EnchantExtractor;
-import ttdev.enchants.api.enchant.PassiveEnchant;
-import ttdev.enchants.enchant.EnchantEnum;
-
-import java.util.Set;
+import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.EnchantInfo;
+import ttdev.enchants.api.enchant.EnchantTrigger;
 
 public class BlockBreakListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
 
-        EnchantExtractor extractor=new EnchantExtractor();
-
-        Set<APair<EnchantEnum, Integer>> enchantPairSet;
-        enchantPairSet=extractor.extractPassive(new Item(event.getPlayer().getItemInHand()));
+        Player player = event.getPlayer();
+        ItemStack item = event.getPlayer().getItemInHand();
 
         /* Fire all passive enchantments for breaking blocks */
-        enchantPairSet.forEach(pair->((PassiveEnchant<BlockBreakEvent>)pair.getKey().getEnchant()).fire(event,pair.getValue()));
+        EnchantInfo info = EnchantInfo.of(event.getPlayer().getItemInHand(), EnchantTrigger.BREAK_BLOCK);
+        info.getEnchants().forEach((enchant, level) -> enchant.trigger(item, level, player, null));
     }
 }

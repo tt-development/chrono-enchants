@@ -2,24 +2,20 @@ package ttdev.enchants.enchant;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.PassiveEnchant;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Sear extends PassiveEnchant<BlockBreakEvent> {
+public class Sear extends GenericEnchant<BlockBreakEvent> {
 
     public Sear() {
-        super("sear", EnchantEnum.SEAR);
+        super("sear", EnchantTrigger.BREAK_BLOCK);
     }
 
     @Override
-    public boolean hasEnchant(Item item) {
-        return false;
-    }
-
-    @Override
-    public void fire(BlockBreakEvent event, int level) {
+    public void trigger(ItemStack item, int level, Player player, BlockBreakEvent event) {
         Block block = event.getBlock();
         Material material = block.getType();
         ItemStack returnStack;

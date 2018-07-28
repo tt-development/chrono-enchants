@@ -1,48 +1,33 @@
 package ttdev.enchants.enchant;
 
-import ttdev.enchants.api.enchant.AbstractEnchant;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
 import java.util.Arrays;
 
 public enum EnchantEnum {
 
-    TRIFECTA(new Trifecta(), "trifecta", true),
-    MARATHON(new Marathon(), "marathon", true),
-    SENSE(new Sense(), "sense", true),
-    SEAR(new Sear(), "sear", true),
-	CONCRETE(new Concrete(), "concrete", true);
+    TRIFECTA(new Trifecta()),
+    MARATHON(new Marathon()),
+    SENSE(new Sense()),
+    SEAR(new Sear()),
+    CONCRETE(new Concrete());
 
-    private AbstractEnchant enchant;
-    private String id;
-    private boolean passive;
+    private GenericEnchant<?> enchant;
 
-    EnchantEnum(AbstractEnchant enchant, String id, boolean passive) {
+    EnchantEnum(GenericEnchant enchant) {
         this.enchant = enchant;
-        this.id = id;
-        this.passive = passive;
     }
 
-    public <EnchantT extends AbstractEnchant> EnchantT getEnchant(Class<EnchantT> clazz) {
-        return clazz.cast(enchant);
-    }
-
-    public static EnchantEnum getEnchant(String enchant) {
-        return Arrays.stream(values())
-                .filter(e -> e.id.equalsIgnoreCase(enchant))
-                .findAny()
-                .orElse(null);
-    }
-
-    public AbstractEnchant getEnchant() {
+    public GenericEnchant<?> getEnchant() {
         return enchant;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public boolean isPassive() {
-        return passive;
+    public static GenericEnchant<?> getEnchant(String name) {
+        return Arrays.stream(values())
+                .filter(enumVal -> enumVal.getEnchant().getName().equalsIgnoreCase(name))
+                .findAny()
+                .map(EnchantEnum::getEnchant)
+                .orElse(null);
     }
 
 }

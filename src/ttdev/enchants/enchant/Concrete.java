@@ -1,41 +1,37 @@
 package ttdev.enchants.enchant;
 
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-
-import ttdev.api.user.items.Item;
 import ttdev.enchants.RandomNumberGen;
-import ttdev.enchants.api.enchant.AggressiveEnchant;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Concrete extends AggressiveEnchant<LivingEntity, LivingEntity> {
+public class Concrete extends GenericEnchant<LivingEntity> {
 	
-	private final int duration = 20 * 3;
-
 	public Concrete() {
-		super("concrete", EnchantEnum.CONCRETE);
+		super("concrete", EnchantTrigger.INFLICT_DAMAGE);
+		super.setDuration(20 * 3);
 	}
 
 	@Override
-	public boolean hasEnchant(Item item) {
-		return false;
-	}
+	public void trigger(ItemStack item, int level, Player player, LivingEntity entityTwo) {
 
-	@Override
-	public void fire(LivingEntity entityOne, LivingEntity entityTwo, int level) {
 		PotionEffectType slownessEffect = PotionEffectType.SLOW;
 		if (!RandomNumberGen.generate(75)) {
 			return;
 		}
 		switch (level) {
 			case 1:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 0, false, false));
+				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 0, false, false));
 				break;
 			case 2:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 1, false, false));
+				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 1, false, false));
 				break;
 			case 3: 
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 2, false, false));
+				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 2, false, false));
 				break;
 		}
 	}
