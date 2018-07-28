@@ -1,27 +1,23 @@
 package ttdev.enchants.enchant;
 
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.PassiveEnchant;
-import ttdev.enchants.handler.ConfigurationHandler;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Trifecta extends PassiveEnchant<LivingEntity> {
+public class Trifecta extends GenericEnchant<Void> {
 
     public Trifecta() {
-        super("trifecta", EnchantEnum.TRIFECTA);
+        super("trifecta", EnchantTrigger.NONE);
+        super.setDisplayName(ChatColor.AQUA+"Trifecta");
     }
 
     @Override
-    public boolean hasEnchant(Item item) {
-        return item.getLore().contains(ConfigurationHandler.getName("Trifecta"));
-    }
-
-    @Override
-    public void fire(LivingEntity entity,int level) {
-        //TODO Modify to fit correctly with PassiveEnchantTicker tick time
-        entity.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20, 1, false, false));
+    public void trigger(ItemStack item, int level, Player player, Void v) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, super.getDuration(), 1, false, false));
     }
 
 }

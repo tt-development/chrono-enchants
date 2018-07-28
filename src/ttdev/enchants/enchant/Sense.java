@@ -1,22 +1,21 @@
 package ttdev.enchants.enchant;
 
-import org.bukkit.entity.LivingEntity;
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.PassiveEnchant;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Sense extends PassiveEnchant<LivingEntity> {
+public class Sense extends GenericEnchant<Void> {
+
     public Sense() {
-        super("sense",EnchantEnum.SENSE);
+        super("sense", EnchantTrigger.NONE);
+        super.setDisplayName(ChatColor.WHITE+"Sense");
     }
 
     @Override
-    public boolean hasEnchant(Item item) {
-        return false;
+    public void trigger(ItemStack item, int level, Player player, Void v) {
+        player.sendMessage("You have sense on your tool.");
     }
 
-    @Override
-    public void fire(LivingEntity entity, int level) {
-        //TODO Implementation
-        entity.sendMessage("You have sense on your tool.");
-    }
 }
