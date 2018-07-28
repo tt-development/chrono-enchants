@@ -15,7 +15,7 @@ public abstract class AbstractEnchant {
 
     public boolean isSame(EnchantEnum type) {
         return this.type == type;
-    }
+    } 
 
     public abstract boolean hasEnchant(Item item);
 

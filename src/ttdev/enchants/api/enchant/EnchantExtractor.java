@@ -20,6 +20,11 @@ public class EnchantExtractor {
         Set<APair<EnchantEnum,Integer>> enchantSet = extract(item);
         return enchantSet.stream().filter(pair->pair.getKey().isPassive()).collect(Collectors.toSet());
     }
+    
+    public Set<APair<EnchantEnum,Integer>> extractAggressive(Item item) {
+        Set<APair<EnchantEnum,Integer>> enchantSet = extract(item);
+        return enchantSet.stream().filter(pair->pair.getKey().isAggressive()).collect(Collectors.toSet());
+    }
 
     public Set<APair<EnchantEnum, Integer>> extract(Item item) {
         return item.getLore().stream()

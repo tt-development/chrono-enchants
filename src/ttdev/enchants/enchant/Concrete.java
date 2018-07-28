@@ -27,17 +27,7 @@ public class Concrete extends AggressiveEnchant<LivingEntity, LivingEntity> {
 		if (!RandomNumberGen.generate(75)) {
 			return;
 		}
-		switch (level) {
-			case 1:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 0, false, false));
-				break;
-			case 2:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 1, false, false));
-				break;
-			case 3: 
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, 2, false, false));
-				break;
-		}
+		entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, (level - 1), false, false));
 	}
 
 }
