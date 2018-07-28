@@ -70,7 +70,7 @@ public class ChronoEnchants extends JavaPlugin {
         Player player = (Player) sender;
 
         /* Used for testing enchantments without enchanting an item */
-        if (label.equalsIgnoreCase("ctestench")) {
+        if (label.equalsIgnoreCase("ctestpassive")) {
             if (args.length < 2) {
                 player.sendMessage(ChatColor.RED + "Incorrect syntax.");
                 return true;

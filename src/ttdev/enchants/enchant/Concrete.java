@@ -25,21 +25,8 @@ public class Concrete extends GenericEnchant<LivingEntity> {
 		if (!RandomNumberGen.generate(75)) {
 			return;
 		}
-<<<<<<< HEAD
-		entityTwo.addPotionEffect(new PotionEffect(slownessEffect, duration, (level - 1), false, false));
-=======
-		switch (level) {
-			case 1:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 0, false, false));
-				break;
-			case 2:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 1, false, false));
-				break;
-			case 3:
-				entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), 2, false, false));
-				break;
-		}
->>>>>>> 4fa76c2eb937feca076bd237b2df3f42d3ffdb20
+
+		entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), (level - 1), false, false));
 	}
 
 }

@@ -1,21 +1,16 @@
 package ttdev.enchants.events;
 
-import java.util.Set;
-import java.util.UUID;
-
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-
-import ttdev.api.APair;
-import ttdev.api.user.items.Item;
+import org.bukkit.inventory.ItemStack;
 import ttdev.enchants.ChronoEnchants;
-import ttdev.enchants.api.enchant.AggressiveEnchant;
-import ttdev.enchants.api.enchant.EnchantExtractor;
+import ttdev.enchants.api.enchant.EnchantInfo;
+import ttdev.enchants.api.enchant.EnchantTrigger;
 import ttdev.enchants.api.event.PlayerHitEntityEvent;
 import ttdev.enchants.api.user.User;
-import ttdev.enchants.enchant.EnchantEnum;
+
+import java.util.UUID;
 
 public final class PlayerHitEntityListener implements Listener {
 
@@ -23,19 +18,15 @@ public final class PlayerHitEntityListener implements Listener {
     public void onPlayerHitEntity(PlayerHitEntityEvent event) {
         Player player = event.getPlayer();
 
-        if(!event.isLivingEntity()){
+        if (!event.isLivingEntity()) {
             return;
         }
-        
-        EnchantExtractor extractor = new EnchantExtractor();
 
-        LivingEntity livingEntity = event.getLivingEntity();
-        
-        Set<APair<EnchantEnum, Integer>> enchantPairSet;
-        enchantPairSet = extractor.extractAggressive(new Item(event.getPlayer().getItemInHand()));
+        ItemStack itemInHand = player.getItemInHand();
+        EnchantInfo info = EnchantInfo.of(itemInHand, EnchantTrigger.INFLICT_DAMAGE);
 
-        /* Fire all aggressive enchantments for hitting entities */
-        enchantPairSet.forEach(pair->((AggressiveEnchant<LivingEntity, PlayerHitEntityEvent>)pair.getKey().getEnchant()).fire(livingEntity, event, pair.getValue()));
+        /* Fire all enchantments for hitting entities */
+        info.getEnchants().forEach((enchant, level) -> enchant.trigger(itemInHand, level, player, event));
 
         UUID PlayerUUID = player.getUniqueId();
         User user = ChronoEnchants.users.get(PlayerUUID);

@@ -4,7 +4,7 @@ authors: [Thomas, Tre]
 version: 1.0
 depend: [API]
 commands:
-  ctestench:
+  ctestpassive:
     description: Test an enchantment on yourself.
     usage: /ctestench <level>
   cenchant:

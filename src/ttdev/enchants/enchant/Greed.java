@@ -1,27 +1,21 @@
 package ttdev.enchants.enchant;
 
-import java.util.ArrayList;
-
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.EnchantTrigger;
+import ttdev.enchants.api.enchant.GenericEnchant;
 
-import ttdev.api.user.items.Item;
-import ttdev.enchants.api.enchant.AggressiveEnchant;
+import java.util.ArrayList;
 
-public class Greed extends AggressiveEnchant<LivingEntity, EntityDeathEvent> {
+public class Greed extends GenericEnchant<EntityDeathEvent> {
 
 	public Greed() {
-		super("greed", EnchantEnum.GREED);
+		super("greed", EnchantTrigger.INFLICT_DAMAGE);
 	}
 
 	@Override
-	public boolean hasEnchant(Item item) {
-		return false;
-	}
-
-	@Override
-	public void fire(LivingEntity entity, EntityDeathEvent event, int level) {
+	public void trigger(ItemStack item, int level, Player player, EntityDeathEvent event) {
 		
 		ArrayList<ItemStack> drops = new ArrayList<>();
 		
