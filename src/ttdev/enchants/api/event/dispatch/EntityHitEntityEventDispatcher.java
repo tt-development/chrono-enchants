@@ -12,6 +12,7 @@ public final class EntityHitEntityEventDispatcher implements Listener {
 
     @EventHandler
     public void onEntityHitEntity(EntityDamageByEntityEvent event) {
+
         Entity playerEntity = event.getDamager();
         if (!(playerEntity instanceof Player)) {
             return;

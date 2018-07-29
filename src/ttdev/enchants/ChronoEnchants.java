@@ -13,10 +13,7 @@ import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
 import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
 import ttdev.enchants.api.user.User;
 import ttdev.enchants.enchant.EnchantEnum;
-import ttdev.enchants.events.BlockBreakListener;
-import ttdev.enchants.events.EnchantTableInteractListener;
-import ttdev.enchants.events.PlayerHitEntityListener;
-import ttdev.enchants.events.PlayerServerJoinListener;
+import ttdev.enchants.events.*;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -48,6 +45,7 @@ public class ChronoEnchants extends JavaPlugin {
         manager.registerEvents(new PlayerHitEntityListener(), this);
         manager.registerEvents(new BlockBreakListener(), this);
         manager.registerEvents(new PlayerServerJoinListener(), this);
+        manager.registerEvents(new PlayerBlockListener(), this);
 
         new PassiveEnchantTicker().startTicking();
 

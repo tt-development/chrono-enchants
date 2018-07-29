@@ -11,7 +11,8 @@ public enum EnchantEnum {
     SENSE(new Sense()),
     SEAR(new Sear()),
     CONCRETE(new Concrete()),
-    GREED(new Greed());
+    GREED(new Greed()),
+    CARPE_DIEM(new CarpeDiem());
 
     private GenericEnchant<?> enchant;
 

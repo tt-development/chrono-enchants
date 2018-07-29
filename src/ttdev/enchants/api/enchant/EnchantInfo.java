@@ -6,6 +6,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import ttdev.enchants.enchant.EnchantEnum;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class EnchantInfo {
 
@@ -14,6 +15,10 @@ public class EnchantInfo {
     private EnchantInfo(ItemStack item, Filter filter) {
 
         ItemMeta meta = item.getItemMeta();
+        if (meta != null && !meta.hasLore()) {
+            return;
+        }
+
         List<String> lore = meta.getLore();
 
         /* Go through each line of lore on the item
@@ -26,35 +31,61 @@ public class EnchantInfo {
         lore.forEach(str -> {
 
             Arrays.stream(EnchantEnum.values()).forEach(entry -> {
+
                 GenericEnchant<?> enchant = entry.getEnchant();
 
-                if (filter != null) {
-                    Set<EnchantTrigger> triggers = filter.getTriggers();
-                    if (!enchant.getTriggers().containsAll(triggers)) {
-                        return;
-                    }
+                if (!str.contains(enchant.getDisplayName())) {
+                    return;
                 }
 
-                if (str.contains(enchant.getDisplayName())) {
-                    String[] split = str.split(" ");
-                    int level = Integer.parseInt(split[1].trim());
-                    enchants.put(enchant, level);
-                }
+                String[] split = str.split(" ");
+                int level = Integer.parseInt(split[1]);
+                enchants.put(enchant, level);
             });
 
         });
+
+        /* Remove all enchantments that don't match those in the filter */
+        if (!filter.enchants.isEmpty()) {
+            /* Check to see if the number of enchantments and type of enchantments are exactly like the filters
+             * and if this isn't the case clear the map of enchantments */
+            if (enchants.keySet().containsAll(filter.enchants) && enchants.keySet().size() == filter.enchants.size()) ;
+            else {
+                enchants.clear();
+            }
+        }
+
+        /* Remove all enchantments that don't contain specified triggers
+         * Either filter.triggers or filter.enchants should have elements. Not both. */
+        if (!filter.triggers.isEmpty()) {
+            enchants.keySet().stream()
+                    .filter(enchant -> !enchant.getTriggers().containsAll(filter.triggers))
+                    .forEach(enchants::remove);
+        }
+
+
     }
 
     private static class Filter {
 
         private Set<EnchantTrigger> triggers;
+        private Set<GenericEnchant> enchants;
 
-        public Filter(EnchantTrigger... triggers) {
+        private Filter(EnchantTrigger... triggers) {
             this.triggers = Sets.newHashSet(triggers);
         }
 
-        public Set<EnchantTrigger> getTriggers() {
+        private Filter(EnchantEnum... enchants) {
+            this.enchants =
+                    Arrays.stream(enchants).map(EnchantEnum::getEnchant).collect(Collectors.toSet());
+        }
+
+        private Set<EnchantTrigger> getTriggers() {
             return triggers;
+        }
+
+        private Set<GenericEnchant> getEnchants() {
+            return enchants;
         }
     }
 
@@ -65,6 +96,11 @@ public class EnchantInfo {
     /* Filter for a certain trigger */
     public static EnchantInfo of(ItemStack item, EnchantTrigger... triggers) {
         return new EnchantInfo(item, new Filter(triggers));
+    }
+
+    /* Filter for a certain enchantment */
+    public static EnchantInfo of(ItemStack item, EnchantEnum... enchants) {
+        return new EnchantInfo(item, new Filter(enchants));
     }
 
     public Map<GenericEnchant, Integer> getEnchants() {
