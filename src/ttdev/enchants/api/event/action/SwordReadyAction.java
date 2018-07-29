@@ -9,6 +9,8 @@ import ttdev.enchants.ChronoEnchants;
 
 public class SwordReadyAction implements EventAction<PlayerInteractEvent> {
 
+    private volatile boolean isBlocking = false;
+
     @Override
     public void handle(PlayerInteractEvent event) {
 
@@ -26,6 +28,8 @@ public class SwordReadyAction implements EventAction<PlayerInteractEvent> {
             only swords will have this enchantment.
              */
 
+            BlockingState blockingState = new BlockingState();
+
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -34,17 +38,22 @@ public class SwordReadyAction implements EventAction<PlayerInteractEvent> {
                         player.sendMessage(ChatColor.GREEN + "Sword readied.");
 
                         /* Wait until the player is done blocking
-                        to launch them
+                        to launch them. This needs to be volatile to
+                        avoid optimization from the compiler
                          */
-                        while (player.isBlocking()) {
-                            System.out.println("Player is still blocking.");
-                        }
+                        while (blockingState.blocking = player.isBlocking()) ;
 
                         player.setVelocity(player.getEyeLocation().getDirection().multiply(10));
-                        System.out.println("Launched player.");
+                        System.out.println("Launched player");
                     }
                 }
             }.runTaskLaterAsynchronously(ChronoEnchants.getInstance(), 20);
         }
+    }
+
+    private class BlockingState {
+
+        private volatile boolean blocking = false;
+
     }
 }
