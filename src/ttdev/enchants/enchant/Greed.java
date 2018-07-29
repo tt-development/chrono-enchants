@@ -3,12 +3,12 @@ package ttdev.enchants.enchant;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
 import java.util.ArrayList;
 
-public class Greed extends GenericEnchant<EntityDeathEvent> {
+public class Greed extends AbstractEnchant<EntityDeathEvent> {
 
 	public Greed() {
 		super("greed", EnchantTrigger.INFLICT_DAMAGE);

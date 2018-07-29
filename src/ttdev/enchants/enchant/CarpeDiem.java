@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import ttdev.enchants.ChronoEnchants;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class CarpeDiem extends GenericEnchant<Void> {
+public class CarpeDiem extends AbstractEnchant<Void> {
 
     public CarpeDiem() {
         super("carpediem", EnchantTrigger.NONE);

@@ -1,6 +1,6 @@
 package ttdev.enchants.enchant;
 
-import ttdev.enchants.api.enchant.GenericEnchant;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 
 import java.util.Arrays;
 
@@ -14,17 +14,17 @@ public enum EnchantEnum {
     GREED(new Greed()),
     CARPE_DIEM(new CarpeDiem());
 
-    private GenericEnchant<?> enchant;
+    private AbstractEnchant<?> enchant;
 
-    EnchantEnum(GenericEnchant enchant) {
+    EnchantEnum(AbstractEnchant enchant) {
         this.enchant = enchant;
     }
 
-    public GenericEnchant<?> getEnchant() {
+    public AbstractEnchant<?> getEnchant() {
         return enchant;
     }
 
-    public static GenericEnchant<?> getEnchant(String name) {
+    public static AbstractEnchant<?> getEnchant(String name) {
         return Arrays.stream(values())
                 .filter(enumVal -> enumVal.getEnchant().getName().equalsIgnoreCase(name))
                 .findAny()

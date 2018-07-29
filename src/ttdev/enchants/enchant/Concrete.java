@@ -7,10 +7,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import ttdev.enchants.RandomNumberGen;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Concrete extends GenericEnchant<LivingEntity> {
+public class Concrete extends AbstractEnchant<LivingEntity> {
 
 	public Concrete() {
 		super("concrete", EnchantTrigger.INFLICT_DAMAGE);

@@ -4,10 +4,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Sense extends GenericEnchant<BlockBreakEvent> {
+public class Sense extends AbstractEnchant<BlockBreakEvent> {
 
     public Sense() {
         super("sense", EnchantTrigger.BLOCK_BREAK);

@@ -5,10 +5,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Marathon extends GenericEnchant<Void> {
+public class Marathon extends AbstractEnchant<Void> {
 
 
     public Marathon() {

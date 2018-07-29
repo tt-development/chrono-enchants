@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class EnchantInfo {
 
-    private final Map<GenericEnchant, Integer> enchants = new HashMap<>();
+    private final Map<AbstractEnchant, Integer> enchants = new HashMap<>();
 
     private EnchantInfo(ItemStack item, Filter filter) {
 
@@ -32,7 +32,7 @@ public class EnchantInfo {
 
             Arrays.stream(EnchantEnum.values()).forEach(entry -> {
 
-                GenericEnchant<?> enchant = entry.getEnchant();
+                AbstractEnchant<?> enchant = entry.getEnchant();
 
                 if (!str.contains(enchant.getDisplayName())) {
                     return;
@@ -63,30 +63,8 @@ public class EnchantInfo {
                     .forEach(enchants::remove);
         }
 
+        enchants.forEach((enchant, level) -> System.out.println(enchant.getDisplayName() + ", " + level));
 
-    }
-
-    private static class Filter {
-
-        private Set<EnchantTrigger> triggers;
-        private Set<GenericEnchant> enchants;
-
-        private Filter(EnchantTrigger... triggers) {
-            this.triggers = Sets.newHashSet(triggers);
-        }
-
-        private Filter(EnchantEnum... enchants) {
-            this.enchants =
-                    Arrays.stream(enchants).map(EnchantEnum::getEnchant).collect(Collectors.toSet());
-        }
-
-        private Set<EnchantTrigger> getTriggers() {
-            return triggers;
-        }
-
-        private Set<GenericEnchant> getEnchants() {
-            return enchants;
-        }
     }
 
     public static EnchantInfo of(ItemStack item) {
@@ -103,8 +81,31 @@ public class EnchantInfo {
         return new EnchantInfo(item, new Filter(enchants));
     }
 
-    public Map<GenericEnchant, Integer> getEnchants() {
+    public Map<AbstractEnchant, Integer> getEnchants() {
         return enchants;
+    }
+
+    private static class Filter {
+
+        private Set<EnchantTrigger> triggers;
+        private Set<AbstractEnchant> enchants;
+
+        private Filter(EnchantTrigger... triggers) {
+            this.triggers = Sets.newHashSet(triggers);
+        }
+
+        private Filter(EnchantEnum... enchants) {
+            this.enchants =
+                    Arrays.stream(enchants).map(EnchantEnum::getEnchant).collect(Collectors.toSet());
+        }
+
+        private Set<EnchantTrigger> getTriggers() {
+            return triggers;
+        }
+
+        private Set<AbstractEnchant> getEnchants() {
+            return enchants;
+        }
     }
 
 }

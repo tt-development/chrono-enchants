@@ -6,14 +6,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 import ttdev.enchants.api.enchant.PassiveEnchantTicker;
 import ttdev.enchants.api.event.dispatch.EntityHitEntityEventDispatcher;
-import ttdev.enchants.api.event.dispatch.InteractEventDispatcher;
 import ttdev.enchants.api.user.User;
 import ttdev.enchants.enchant.EnchantEnum;
-import ttdev.enchants.events.*;
+import ttdev.enchants.events.BlockBreakListener;
+import ttdev.enchants.events.PlayerHitEntityListener;
+import ttdev.enchants.events.PlayerInteractListener;
+import ttdev.enchants.events.PlayerServerJoinListener;
 
 import java.util.HashMap;
 import java.util.UUID;
@@ -38,14 +40,12 @@ public class ChronoEnchants extends JavaPlugin {
 
         PluginManager manager = getServer().getPluginManager();
         /* register api listeners */
-        manager.registerEvents(new InteractEventDispatcher(), this);
+        manager.registerEvents(new PlayerInteractListener(), this);
         manager.registerEvents(new EntityHitEntityEventDispatcher(), this);
         /* register implementation listeners */
-        manager.registerEvents(new EnchantTableInteractListener(), this);
         manager.registerEvents(new PlayerHitEntityListener(), this);
         manager.registerEvents(new BlockBreakListener(), this);
         manager.registerEvents(new PlayerServerJoinListener(), this);
-        manager.registerEvents(new PlayerBlockListener(), this);
 
         new PassiveEnchantTicker().startTicking();
 
@@ -73,7 +73,7 @@ public class ChronoEnchants extends JavaPlugin {
                 player.sendMessage(ChatColor.RED + "Incorrect syntax.");
                 return true;
             }
-            GenericEnchant<?> enchant = EnchantEnum.getEnchant(args[0]);
+            AbstractEnchant<?> enchant = EnchantEnum.getEnchant(args[0]);
             if (enchant == null) {
                 player.sendMessage(ChatColor.RED + "Couldn't find enchant with name " + args[0] + ".");
                 return true;

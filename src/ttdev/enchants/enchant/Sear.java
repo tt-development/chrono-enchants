@@ -6,10 +6,10 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
+import ttdev.enchants.api.enchant.AbstractEnchant;
 import ttdev.enchants.api.enchant.EnchantTrigger;
-import ttdev.enchants.api.enchant.GenericEnchant;
 
-public class Sear extends GenericEnchant<BlockBreakEvent> {
+public class Sear extends AbstractEnchant<BlockBreakEvent> {
 
     public Sear() {
         super("sear", EnchantTrigger.BLOCK_BREAK);
