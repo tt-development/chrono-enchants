@@ -21,11 +21,15 @@ public class Concrete extends AbstractEnchant<LivingEntity> {
 	@Override
 	public void trigger(ItemStack item, int level, Player player, LivingEntity entityTwo) {
 
+		/* Generate the potioneffect. */
 		PotionEffectType slownessEffect = PotionEffectType.SLOW;
+		
+		/* 25% chance to activate the enchant. */
 		if (!RandomNumberGen.generate(75)) {
 			return;
 		}
 
+		/* Give the entity the potioneffect. */
 		entityTwo.addPotionEffect(new PotionEffect(slownessEffect, super.getDuration(), (level - 1), false, false));
 	}
 

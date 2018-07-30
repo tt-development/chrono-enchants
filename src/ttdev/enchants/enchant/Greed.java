@@ -17,14 +17,17 @@ public class Greed extends AbstractEnchant<EntityDeathEvent> {
 	@Override
 	public void trigger(ItemStack item, int level, Player player, EntityDeathEvent event) {
 		
+		/* Get the list of drops. */
 		ArrayList<ItemStack> drops = new ArrayList<>();
 		
+		/* Add extra items to a new list. */
 		for (int i=0; i < event.getDrops().size(); i++) {
 			ItemStack tempItemStack = event.getDrops().get(i);
 			tempItemStack.setAmount(tempItemStack.getAmount() + level);
 			drops.add(tempItemStack);
 		}
 		
+		/* Replace the old list with the new list. */
 		event.getDrops().clear();
 		event.getDrops().addAll(drops);
 		
