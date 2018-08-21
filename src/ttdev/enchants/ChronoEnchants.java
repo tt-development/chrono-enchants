@@ -47,8 +47,6 @@ public class ChronoEnchants extends JavaPlugin {
         manager.registerEvents(new BlockBreakListener(), this);
         manager.registerEvents(new PlayerServerJoinListener(), this);
 
-
-
         new PassiveEnchantTicker().startTicking();
 
         getLogger().info(getName() + " enabled.");
